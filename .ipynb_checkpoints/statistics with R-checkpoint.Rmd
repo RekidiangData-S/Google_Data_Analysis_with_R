@@ -1,0 +1,84 @@
+---
+title: "statistic with R"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Descriptive Statistic
+
+Data
+```{r cars}
+student.height <- c(100, 106, 121, 111, 109, 111, 103, 117, 114)
+summary(student.height)
+```
+
+### Measurement of central tendance
+
+```{r pressure, echo=FALSE}
+Mean <- mean(student.height, trim = 0.1, na.rm = TRUE)
+Median <- median(student.height)
+Mode <- sort(table(student.height), decreasing = TRUE)[1]
+print("Mean : ", Mean, "Median : ", Median, "Mode : ", Mode)
+```
+
+> option to trim the data. The argument trim = 0.1 (for example) will remove 10% data from the top and 10% from the bottom
+> There is no direct command in R Basics to find the mode
+
+### Measurement of Variation
+
+```{r cars}
+Range <- range(student.height)
+Quantile <- quantile(student.height)
+IQR <- IQR(student.height)
+Standard_D <- sd(student.height)
+Min <- min(student.height)
+Max <- max(student.height)
+print("Range : ", Range, "Quantile : ", Quantile, "Standard_D : ", Standard_D, , "IQR : ", IQR)
+
+```
+>quartile : 
+  * 0% = Lowest value, 
+  * 25% = First quartile (Q1), 
+  * 50% = Median (Q2), 
+  * 75% = Third quartile (Q3), 
+  * 100% = Highest value
+  
+  
+```{r pressure, echo=FALSE}
+boxplot(student.height, main = "Boxplot of student.height (cm)", col = "blue",border = "brown", horizontal = TRUE, xlab = "student height in Cm",notch = FALSE)
+```
+
+
+## Data Visualization
+
+
+```{r pressure, echo=FALSE}
+library(palmerpenguins)
+data("penguins")
+head(penguins)
+```
+```{r pressure, echo=FALSE}
+str(penguins)
+```
+
+```{r pressure, echo=FALSE}
+student.height <- c(100, 106, 121, 111, 109, 111, 103, 117, 114)
+student.weigth <- c(40, 46, 61, 51, 49, 51, 43, 57, 64)
+par(mfrow=c(1,2))
+plot(student.height, student.weigth, main="Arrival vs Departure Delay", 
+ xlab="Arrival Delay", ylab="Departure Delay", pch=3)
+plot(student.height, student.weigth, main="Arrival vs Departure Delay", 
+ xlab="Arrival Delay", ylab="Departure Delay", pch=3)
+```
+```{r pressure, echo=FALSE}
+hist(student.weigth, breaks = 10)
+```
+
+```{r pressure, echo=FALSE}
+boxplot(student.height)
+```
+
+hist(distance, breaks = 10

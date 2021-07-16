@@ -1,0 +1,112 @@
+---
+title: "diamands_data"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+install.packages(“ggplot2”) 
+install.packages(“palmerpenguins”)
+```
+
+```{r}
+library(ggplot2)
+library(palmerpenguins)
+library(tidyverse)
+```
+ 
+
+## Load Data
+
+``` {r}
+data(penguins)
+head(penguins)
+```
+``` {r}
+summary(penguins)
+
+```
+
+## data structure
+```{r}
+colnames(penguins)
+```
+
+```{r}
+str(penguins)
+```
+
+
+```{r}
+glimpse(penguins)
+```
+
+## Visualization
+
+```{r}
+ggplot(data = penguins) + geom_point(mapping = aes(x = flipper_length_mm, y = body_mass_g, color=species))
+```
+
+```{r}
+ggplot(data = penguins) + geom_point(mapping = aes(x = flipper_length_mm, y = body_mass_g, color=species))+facet_wrap(~species)
+```
+
+
+```{r}
+ggplot(data = penguins) + geom_point(mapping = aes(x = flipper_length_mm, y = body_mass_g, color=species))+facet_grid(island~species)
+```
+
+```{r}
+ggplot(data = penguins) + geom_point(mapping = aes(x = flipper_length_mm, y = body_mass_g, shape=species, color=species, size=species, alpha=species))+facet_wrap(~species)
+
+```
+
+```{r}
+ggplot(data = penguins) + geom_smooth(mapping = aes(x = flipper_length_mm, y = body_mass_g))
+
+```
+
+```{r}
+ggplot(data = penguins) + geom_smooth(mapping = aes(x = flipper_length_mm, y = body_mass_g, linetype=species, , color=species))
+
+```
+
+```{r}
+ggplot(data = penguins) + 
+  geom_point(mapping = aes(x = flipper_length_mm, y = body_mass_g, color=species))+
+  geom_smooth(mapping = aes(x = flipper_length_mm, y = body_mass_g))
+```
+
+
+```{r}
+ggplot(data = penguins) + geom_bar(aes(x = island, fill= island, color= island))
+
+```
+
+```{r}
+penguins %>% 
+  filter(sex == "male") %>%  
+    ggplot(aes(x = flipper_length_mm, y = body_mass_g, colour = species)) +  
+    geom_point(alpha = 0.3,  position = position_jitter()) + stat_smooth(method = "lm")
+```
+
+```{r}
+penguins %>% 
+  filter(sex == "female") %>%  
+    ggplot(aes(x = flipper_length_mm, y = body_mass_g, colour = species)) +  
+    geom_point(alpha = 0.3,  position = position_jitter()) + stat_smooth(method = "lm")
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r}
+?geom_bar
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
